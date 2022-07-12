@@ -3,10 +3,10 @@ import store from '@/vuex/store.js'
 import router from '../router'
 
 const api = axios.create();
-api.defaults.baseURL = 'http://api.com';
+api.defaults.baseURL = 'http://127.0.0.1:7003/';
 api.defaults.timeout = 5000;
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
+//api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 
 // 请求拦截
 api.interceptors.request.use(function (config) {
@@ -60,4 +60,19 @@ api.interceptors.response.use(function (response) {
 
     return Promise.reject(error);
   });
+
+  export function post(url,data = {}){
+    const post_url = api.defaults.baseURL + url
+    console.log('post_url', post_url)
+    return new Promise((resolve,reject) => {
+      axios.post(post_url,data)
+      .then(response => {
+        console.log('response', response)
+        resolve(response.data);
+      },err => {
+        reject(err)
+      })
+    })
+  }
+  
 export default api

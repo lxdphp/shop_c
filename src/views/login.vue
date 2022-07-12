@@ -39,6 +39,10 @@
 <script>
 import Header from '@/common/_header.vue'
 import { Toast } from 'mint-ui'
+
+
+import { get, post, postform } from '@/http/api.js'
+
 export default {
   components:{
     'v-header':Header
@@ -47,16 +51,29 @@ export default {
     return {
       account:'',
       password:'',
-      toggle:!this.$store.state.login.token
+      toggle:!this.$store.state.login.token,
+      token: ''
     }
   },
   methods:{
     // 登录按钮
     login(){
-      if(this.account!=="" && this.password!=="") {
-        Toast('登录成功,存储token,跳转网页');
-        this.toggle = false;
-        this.$store.commit('CHANGE_TOKEN',1);
+      if(this.account!=="" ) {
+        console.log('login start', this.account)
+        
+        const post_data = {
+          phone: this.account
+        }
+        post('index/login', post_data).then((res) => {
+          console.log('login', res.data)
+          this.token = res.data.token
+          Toast('登录成功,存储token,跳转网页');
+          this.toggle = false;
+        this.$store.commit('CHANGE_TOKEN',this.token);
+        }).catch((error) => {
+          console.log('error', error)
+        })
+        
       }else {
         Toast('账号密码不能为空');
       }

@@ -86,9 +86,10 @@ const actions = {
 
 // 父组件发送异步请求
   setDatas({commit}) {
+    console.log('commit', commit)
     vm.$api({
-        method:'post',
-        url:"/detail"
+        method: 'get',
+        url: '/goods/info?parent_id=-1&index=1'
       }).then(response=>{
         commit('SET_DATAS',response.data);
       })

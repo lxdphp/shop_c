@@ -5,7 +5,7 @@
           <div class="header-icon">
               <span class="icon2-user"></span>
           </div>
-          <span>登录/注册</span>
+          <span>欢迎 {{ token }}</span>
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: ''}">
@@ -103,13 +103,18 @@
 
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
-
+  import store from '@/vuex/store.js'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   export default {
     components: {
       'v-baseline': Baseline,
       'v-footer': Footer
+    },
+    data(){
+      return {
+        token:  store.state.login.token
+      }
     }
   }
 </script>

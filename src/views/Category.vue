@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="wrap">
     <v-header class="header">
-      <h1 slot="title">商品分类1</h1>
+      <h1 slot="title">商品分类</h1>
     </v-header>
     <section class="view">
       <v-aside :datas="allData.aside"/>
@@ -29,11 +29,11 @@ export default {
   },
   created () {
     this.$api({
-      method: 'post',
-      url: '/category'
+      method: 'get',
+      url: '/category/list?parent_id=-1&index=1'
     }).then((res) => {
-      console.log('allData', res.data)
-      this.allData = res.data
+      console.log('allData', res.data.data)
+      this.allData = res.data.data
 
     }).catch((error) => {
       console.log(error)
