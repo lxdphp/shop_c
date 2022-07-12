@@ -6,7 +6,7 @@
          v-for="(k,i) in _datas.list"
          :key='i'
       >
-        <router-link :to="{name:'详情页'}">
+        <router-link   :to="{ name:'详情页',query:{id:k.id}  }">
           <img v-lazy="k.imgPath"><span>{{k.title}}</span>
         </router-link>
       </li>

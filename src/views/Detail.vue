@@ -4,7 +4,7 @@
     <v-chose/>
     <v-content/>
     <v-baseline/>
-    <v-footer/>>
+    <v-footer/>
   </div>
 </template>
 
@@ -25,7 +25,9 @@ export default {
   },
 
   beforeCreate(){
-    this.$store.dispatch('setDatas');
+    console.log('this.$route.query', this.$route.query)
+    const id = this.$route.query.id;
+    this.$store.dispatch('setDatas', id);
   }
 }
 </script>

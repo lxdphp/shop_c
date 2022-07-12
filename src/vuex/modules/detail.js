@@ -85,13 +85,14 @@ let vm = new Vue({});
 const actions = {
 
 // 父组件发送异步请求
-  setDatas({commit}) {
+  setDatas({commit}, id) {
     console.log('commit', commit)
+    console.log('this.$route.query 22222',id)
     vm.$api({
         method: 'get',
-        url: '/goods/info?parent_id=-1&index=1'
+        url: '/goods/info?parent_id=-1&index=1&id=' + id
       }).then(response=>{
-        commit('SET_DATAS',response.data);
+        commit('SET_DATAS',response.data.data);
       })
   },
 
