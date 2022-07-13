@@ -2,10 +2,10 @@
   <!-- gotoRouter:点击后路由跳转到与id名相同的route.name所对应的路径 -->
   <footer class="footer" @click.stop='gotoRouter'>
     <mt-tabbar v-model="selected" fixed>
-    <mt-tab-item id="首页">
+    <!-- <mt-tab-item id="首页">
       <i slot="icon" class="icon-index"></i>
         首页
-    </mt-tab-item>
+    </mt-tab-item> -->
     <mt-tab-item id="分类页">
       <i slot="icon" class="icon-category"></i>
       分类

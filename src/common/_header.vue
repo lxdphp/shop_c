@@ -2,7 +2,7 @@
   <header>
     <router-link
      class="icon-go"
-     :to="{ name: '首页'}"
+     :to="{ name: '分类页'}"
      v-if="$route.matched[0].path=='/category'">
     </router-link>
     <span class="icon-go" @click="$router.go(-1)" v-else></span>

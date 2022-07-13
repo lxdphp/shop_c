@@ -6,11 +6,11 @@
     </v-header>
 
     <div class="pay-address">
-      <div>
+      <!-- <div>
         <p class="main-address-per">收货人:<span>王先生</span></p>
         <p class="main-address-tel">15985698749</p>
-      </div>
-      <p>收货地址:<span>河南省郑州市中原区秦岭路8号院59号单元28层15号东户第三家</span></p>
+      </div> -->
+      <p><span>您所选购的商品会在线下微信联系您，进行配送，点击支付前，请确保您已登陆！</span></p>
     </div>
 
     <div class="pay-product">
@@ -28,14 +28,14 @@
 
       <!-- 支付成功后的提示 -->
       <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空</br>
-        购物车列表重新设置
+      
+        提交成功，我们会在线下微信与您联系</br>
+        
       </div>
     </div>
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
-      <span>立即支付</span>
+      <span>同意支付</span>
     </footer>
 
 
@@ -45,6 +45,7 @@
 <script>
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
+import { get, post, postform } from '@/http/api.js'
 import {
   MessageBox
 } from 'mint-ui';
@@ -70,7 +71,7 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.carList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += selectedList[i].price * 1
       }
       return allpay
     }
@@ -90,14 +91,31 @@ export default {
             `确定支付${this.allpay}元`
           )
           .then(action => { //点击成功执行这里的函数
-            this.confirm = false;
-            this.$store.commit('SET_LOADING', true);
+            // 请求后台数据
+            const post_data = []
+            this.carList.map( item => {
+              const arr ={
+                phone: this.$store.state.login.token,
+                good_id: item.id,
+                price: item.price,
+                num: 1,
+              }
+              post_data.push(arr)
+            })
+            console.log('post_data', post_data)
+            post('order/create', post_data).then((res) => {
+              this.$store.commit('SET_LOADING', true);
             this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
             this.$store.dispatch('resetCount'); //重置购物车数量
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
               this.confirm = true; //支付完成后切换视图
             }, 300)
+            }).catch((error) => {
+              console.log('error', error)
+            })
+            this.confirm = false;
+            
           }, function (err) {
             //点击取消执行这里的函数
           });

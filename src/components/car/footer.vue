@@ -37,7 +37,7 @@ export default {
 
         for (let i = 0; i < this.$store.getters.selectedList.length; i++) {
 
-          all += this.$store.getters.selectedList[i].price;
+          all += this.$store.getters.selectedList[i].price * 1;
 
         }
 
