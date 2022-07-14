@@ -12,15 +12,15 @@
         :readonly = '!toggle'
         :disableClear = '!toggle'
         ></mt-field>
-      <mt-field
+      <!-- <mt-field
        label="密码"
        placeholder="请输入密码"
        type="password"
        v-model="password"
        :readonly='!toggle'
        :disableClear = '!toggle'
-        ></mt-field>
-      <p class="tip">Tip : 账号密码随便输</p>
+        ></mt-field> -->
+      <p class="tip">Tip : 账号请输入手机号</p>
     </section>
     <mt-button
      plain

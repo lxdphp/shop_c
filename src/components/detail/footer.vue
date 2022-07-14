@@ -56,8 +56,8 @@ export default {
         (
         `商品名称:${product[0].title}</br>` +
         `价格:${product[0].price}</br>` +
-        `规格:${product[0].size}</br>` +
-        `颜色:${product[0].col}</br>` +
+        // `规格:${product[0].size}</br>` +
+        // `颜色:${product[0].col}</br>` +
         `商品ID:${product[0].id}</br>`
         )
         .then(action => {      //点击成功执行这里的函数

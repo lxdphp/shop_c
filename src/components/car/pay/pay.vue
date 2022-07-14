@@ -46,6 +46,7 @@
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
 import { get, post, postform } from '@/http/api.js'
+import store from '@/vuex/store.js'
 import {
   MessageBox
 } from 'mint-ui';
@@ -95,7 +96,7 @@ export default {
             const post_data = []
             this.carList.map( item => {
               const arr ={
-                phone: this.$store.state.login.token,
+                phone: store.state.login.token,
                 good_id: item.id,
                 price: item.price,
                 num: 1,
