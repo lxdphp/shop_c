@@ -3,7 +3,7 @@ import store from '@/vuex/store.js'
 import router from '../router'
 
 const api = axios.create();
-api.defaults.baseURL = 'http://127.0.0.1:7003/';
+api.defaults.baseURL = 'http://120.48.96.203:7001/';
 api.defaults.timeout = 5000;
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 //api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
